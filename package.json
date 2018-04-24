@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ellenJJang/manwon/issues"
   },
-  "homepage": "https://github.com/ellenJJang/manwon#readme"
+  "homepage": "https://github.com/ellenJJang/manwon#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2"
+  }
 }
