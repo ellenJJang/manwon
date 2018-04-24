@@ -33,7 +33,7 @@ app.post('/submit', function (req, res){
 	res.redirect('/');
 });
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
 	var fileString = fs.readFileSync('data.log', 'utf8');
 	console.log(fileString);
 	records = JSON.parse(fileString);
