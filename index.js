@@ -14,9 +14,13 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 var records = [];
+var DAY_GOAL = 50000;
+var today = moment(new Date()).format("DD/MM/YYYY");
+var remains = 0;
+
 app.get('/', function (req, res) {
 	var params = {
-		date    : moment(new Date()).format("DD/MM/YYYY"),
+		date    : today,
 	  	history : records
 	};
 
@@ -24,19 +28,36 @@ app.get('/', function (req, res) {
 });
 
 app.post('/submit', function (req, res){
-	var dayRecord = {
-		date : moment(new Date()).format("DD/MM/YYYY"),
-		list : [{'subject' : req.body.subject, 'cost' : req.body.cost}]
-	};
-	records.push(dayRecord);
+	var added = false;
+	records.forEach(function(value){
+		if(value.date === today){
+			value.list.push({'subject' : req.body.subject, 'cost' : new Number(req.body.cost)});
+			value.sum = new Number(value.sum) + new Number(req.body.cost);
+			value.remain = new Number(value.remain) - new Number(req.body.cost);
+			added = true;
+		}
+	});
+
+	if(!added) {
+		var record = {
+			'date' 		: today,
+			'list' 		: [{'subject' : req.body.subject, 'cost' : new Number(req.body.cost)}],
+			'sum' 		: new Number(req.body.cost),
+			'remain' 	: remains + DAY_GOAL - new Number(req.body.cost)
+		};
+		records.push(record);
+	}
 	fs.writeFile('data.log', JSON.stringify(records));
 	res.redirect('/');
 });
 
 app.listen(process.env.PORT || 3000, function () {
 	var fileString = fs.readFileSync('data.log', 'utf8');
-	console.log(fileString);
 	records = JSON.parse(fileString);
-	console.log(records);
+
+	if(records.length != 0){
+		remains = records[records.length-1].remain;
+	}
+	console.log('남은금액 '+remains);
   	console.log('READY');
 });

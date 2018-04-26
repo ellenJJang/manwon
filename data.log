@@ -1,1 +1,1 @@
-[{"date":"24/04/2018","list":[{"subject":"test1","cost":"11"}]},{"date":"24/04/2018","list":[{"subject":"test2","cost":"222"}]}]
+[{"date":"24/04/2018","list":[{"subject":"test1","cost":11},{"subject":"test22","cost":22},{"subject":"배고파","cost":3000},{"subject":"여보보ㅗㅇ","cost":10000}],"sum":13033,"remain":36967},{"date":"25/04/2018","list":[{"subject":"내일은?","cost":1221},{"subject":"잘되네","cost":34333},{"subject":"테이블디자인","cost":10000}],"sum":45554,"remain":41413},{"date":"26/04/2018","list":[{"subject":"오늘은?","cost":2323}],"sum":2323,"remain":89090}]
