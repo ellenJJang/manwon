@@ -46,7 +46,6 @@ module.exports = function(app, Record, Stat)
     //make older stat 
     app.put('/stat', function(req, res) {
         // 이전 데이터 있는지 확인
-        Stat.
     });
 
     app.get('/stat', function(req, res) {
