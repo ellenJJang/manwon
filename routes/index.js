@@ -18,6 +18,7 @@ module.exports = function(app, Record)
             }
             var params = {
                 date    : today,
+                lastRemain : lastRemain,
                 history : records
             };
 
