@@ -76,16 +76,17 @@ module.exports = function(app, Record, Total)
                     record.list.splice(idx, 1);
                     record.sum = record.sum - tmp.cost;
                     record.save();
+
+                    Total.findOne(function(err, total) {
+                        if (err) return res.status(500).send({error: 'database failure'});
+                        if(total){
+                            total.totalSum = total.totalSum - new Number(tmp.cost);
+                            total.save();
+                            res.redirect('/record');
+                        } 
+                    });
                 }                
             }
-            Total.findOne(function(err, total) {
-                if (err) return res.status(500).send({error: 'database failure'});
-                if(total){
-                    total.totalSum = total.totalSum - new Number(req.body.cost);
-                    total.save();
-                    res.redirect('/');
-                } 
-            });
         });
     });
 }
