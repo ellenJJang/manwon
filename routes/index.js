@@ -82,7 +82,7 @@ module.exports = function(app, Record, Total)
                         if(total){
                             total.totalSum = total.totalSum - new Number(tmp.cost);
                             total.save();
-                            res.redirect('/record');
+                            res.json({result: 1});
                         } 
                     });
                 }                

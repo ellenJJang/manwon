@@ -4,7 +4,7 @@ function remove(recordListId, recordId){
 	fetch('/'+recordListId+'/'+recordId, {method: 'DELETE'})
     	.then(function(response) {
 		    if(response.ok) {
-		        console.log('Click was recorded');
+		        location.href = "/";
 		        return;
 	      	}
 	      	throw new Error('Request failed.');
