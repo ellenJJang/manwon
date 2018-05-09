@@ -17,7 +17,13 @@ module.exports = function(app, Record, Total)
         Record.find(function (err, records) {
             if(err) return res.status(500).send({error: 'database failure'});
             if(records){
-                params.history = records;
+
+                var historyArr = [], size = 5;
+                while(records.length > 0){
+                    historyArr.push(records.splice(0, size));
+                }
+
+                params.history = historyArr;
                 Total.findOne(function(err, total){
                     if (err) return res.status(500).send({error: 'database failure'});
                     if(total) {
